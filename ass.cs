@@ -137,7 +137,7 @@ namespace assinment2
             BinaryFormatter formatter = new BinaryFormatter();
             for (int i = 0; i < NumberOfCustomers; i++)
             {
-                formatter.Serialize(fs, banckAccounts[i].GetPersonfullName());
+                formatter.Serialize(fs, banckAccounts[i]);
             }
             fs.Close();
 
@@ -147,12 +147,17 @@ namespace assinment2
         {
             FileStream filestream = new FileStream("Data.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter bf = new BinaryFormatter();
-
+            int i = 0;
+            BankAccount[] ba = new BankAccount[NumberOfCustomers];
             while (filestream.Position < filestream.Length)
             {
-                string name = (string)bf.Deserialize(filestream);
-                Console.WriteLine(name);
-            }
+                //retreaving all the users 
+                ba[i]= (BankAccount)bf.Deserialize(filestream);
+                // for insuring the load method
+                Console.WriteLine(ba[i].GetPersonfullName());
+                i++;
+
+                    }
             filestream.Close();
         }
 
