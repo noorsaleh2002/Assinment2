@@ -34,17 +34,17 @@ namespace assinment2
         private Person p;
         private string cardNumber, pinCode, email;
         private int accountBalance;
-        
+
 
         public BankAccount(Person p, string email, string cardNumber, string pinCode, int accountBalance)
         {
-            this.p= p;
+            this.p = p;
             if (cardNumber.Length == 9)
                 this.cardNumber = cardNumber;
             else
             {
 
-                Console.WriteLine(cardNumber.Length);
+                Console.WriteLine("The length of the cardnumber is :{0}",cardNumber.Length);
                 Console.WriteLine("The CardNumber is wrong,it will be null");
                 this.cardNumber = "";
             }
@@ -52,7 +52,7 @@ namespace assinment2
                 this.pinCode = pinCode;
             else
             {
-                Console.WriteLine("The Pincode is wrong,it will be null");
+                Console.WriteLine("The Pincode is wrong it shoud be (4 char) so it will be null");
                 this.pinCode = "";
             }
             this.email = email;
@@ -65,10 +65,10 @@ namespace assinment2
         public int AccountBalance { get => accountBalance; set => accountBalance = value; }
         public string GetPersonfullName()
         {
-           return p.GetFullName();
+            return p.GetFullName();
         }
 
-        
+
 
 
     }
@@ -83,7 +83,7 @@ namespace assinment2
         {
             bankCapacity = 0;
         }
-       
+
 
         public Bank(int bankCapacity)
         {
@@ -95,7 +95,7 @@ namespace assinment2
 
             banckAccounts[NumberOfCustomers] = ba;
             NumberOfCustomers++;
-             
+
         }
         public bool IsBankUser(string cardNumber, string pinCode)
         {
@@ -119,7 +119,7 @@ namespace assinment2
         }
         public void Withdraw(BankAccount ba, int withD)
         {
-            if(ba.AccountBalance>=withD)
+            if (ba.AccountBalance >= withD)
             {
                 ba.AccountBalance -= withD;
             }
@@ -127,7 +127,7 @@ namespace assinment2
         }
         public void Deposit(BankAccount ba, int deposit)
         {
-            ba.AccountBalance+=deposit;
+            ba.AccountBalance += deposit;
 
 
         }
@@ -152,12 +152,12 @@ namespace assinment2
             while (filestream.Position < filestream.Length)
             {
                 //retreaving all the users 
-                ba[i]= (BankAccount)bf.Deserialize(filestream);
+                ba[i] = (BankAccount)bf.Deserialize(filestream);
                 // for insuring the load method
                 Console.WriteLine(ba[i].GetPersonfullName());
                 i++;
 
-                    }
+            }
             filestream.Close();
         }
 
@@ -171,23 +171,7 @@ namespace assinment2
     {
         static void Main(string[] args)
         {
-            int bankCapacity = 10;
-            Person p1 = new Person("Noor", "saleh");
-
-            string pinCode = "1234";
-            string cardNumber = "123456789";
-            int accountBalance = 100;
-            BankAccount tmpAccount = new BankAccount(p1, "Ahmad@test.com", cardNumber, pinCode, accountBalance);
-
-
-            Bank testBank = new Bank(bankCapacity);
-
-            testBank.AddNewAccount(tmpAccount);
-
-            testBank.Save();
-
-            Bank newTestBank = new Bank();
-            newTestBank.Load();
+            
         }
     }
 }
