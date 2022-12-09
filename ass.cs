@@ -177,23 +177,7 @@ namespace assinment2
     {
         static void Main(string[] args)
         {
-            int bankCapacity = 10;
-            Person p1 = new Person("Noor","saleh");
-
-            string pinCode = "1234";
-            string cardNumber = "123456789";
-            int accountBalance = 100;
-            BankAccount tmpAccount = new BankAccount(p1, "Ahmad@test.com", cardNumber, pinCode, accountBalance);
-
-
-            Bank testBank = new Bank(bankCapacity);
-
-            testBank.AddNewAccount(tmpAccount);
-
-            testBank.Save();
-
-            Bank newTestBank = new Bank();
-            newTestBank.Load();
+            
 
         }
     }
