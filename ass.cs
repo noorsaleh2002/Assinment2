@@ -1,39 +1,42 @@
+
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace assinment2
 {
     [Serializable]
-    class Person
+    public class Person
     {
 
         string fullName;
-
+        string fname, lname;
 
         public Person()
         {
 
-            this.fullName = "";
+            this.FullName = "";
+            this.fname = "";
+            this.lname = "";
 
         }
 
         public Person(string fname, string lname)
         {
-
-            fullName = fname + " " + lname;
-        }
-        public string GetFullName()
-        {
-            return fullName;
+            this.fname = fname;
+            this.lname = lname;
+            FullName = fname + " " + lname;
         }
 
+        public string Fname { get => fname; set => fname = value; }
+        public string Lname { get => lname; set => lname = value; }
+        public string FullName { get => fullName; set => fullName = value; }
     }
     [Serializable]
-    class BankAccount
+    public class BankAccount
     {
         private Person p;
         private string cardNumber, pinCode, email;
-        private int accountBalance;
+        private int accountBalance=0;
 
 
         public BankAccount(Person p, string email, string cardNumber, string pinCode, int accountBalance)
@@ -44,7 +47,7 @@ namespace assinment2
             else
             {
 
-                Console.WriteLine("The length of the cardnumber is :{0}",cardNumber.Length);
+                Console.WriteLine("The length of the cardnumber is :{0}", cardNumber.Length);
                 Console.WriteLine("The CardNumber is wrong,it will be null");
                 this.cardNumber = "";
             }
@@ -63,9 +66,12 @@ namespace assinment2
         public string PinCode { get => pinCode; set => pinCode = value; }
         public string Email { get => email; set => email = value; }
         public int AccountBalance { get => accountBalance; set => accountBalance = value; }
-        public string GetPersonfullName()
-        {
-            return p.GetFullName();
+       public void print() {
+            Console.WriteLine("User name: {0}",p.FullName);
+            Console.WriteLine("Email: {0}", email);
+            Console.WriteLine("Card number: {0}", cardNumber);
+            Console.WriteLine("Pin code: {0}", pinCode);
+            Console.WriteLine("Account number: {0}", accountBalance);
         }
 
 
@@ -73,22 +79,22 @@ namespace assinment2
 
     }
     [Serializable]
-    class Bank
+    public class Bank
     {
 
         int bankCapacity;
-        static public int NumberOfCustomers = 0;
+        public static int NumberOfCustomers = 0;
         BankAccount[] banckAccounts;
         public Bank()
         {
-            bankCapacity = 0;
+            this.bankCapacity = 0;
         }
 
 
         public Bank(int bankCapacity)
         {
             this.bankCapacity = bankCapacity;
-            banckAccounts = new BankAccount[bankCapacity];
+            banckAccounts = new BankAccount[this.bankCapacity];
         }
         public void AddNewAccount(BankAccount ba)
         {
@@ -111,11 +117,11 @@ namespace assinment2
         {
             for (int i = 0; i < NumberOfCustomers; i++)
             {
-                if (banckAccounts[i].PinCode == PinCode && banckAccounts[i].CardNumber == CardNumber)
+                if (banckAccounts[i].PinCode == PinCode && banckAccounts[i].CardNumber == CardNumber) 
 
                     return banckAccounts[i].AccountBalance;
             }
-            return 0f;
+            return -1;
         }
         public void Withdraw(BankAccount ba, int withD)
         {
@@ -148,13 +154,13 @@ namespace assinment2
             FileStream filestream = new FileStream("Data.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter bf = new BinaryFormatter();
             int i = 0;
-            BankAccount[] ba = new BankAccount[NumberOfCustomers];
+            
             while (filestream.Position < filestream.Length)
             {
                 //retreaving all the users 
-                ba[i] = (BankAccount)bf.Deserialize(filestream);
+                banckAccounts[i] = (BankAccount)bf.Deserialize(filestream);
                 // for insuring the load method
-                Console.WriteLine(ba[i].GetPersonfullName());
+                banckAccounts[i].print();
                 i++;
 
             }
@@ -171,7 +177,24 @@ namespace assinment2
     {
         static void Main(string[] args)
         {
-            
+            int bankCapacity = 10;
+            Person p1 = new Person("Noor","saleh");
+
+            string pinCode = "1234";
+            string cardNumber = "123456789";
+            int accountBalance = 100;
+            BankAccount tmpAccount = new BankAccount(p1, "Ahmad@test.com", cardNumber, pinCode, accountBalance);
+
+
+            Bank testBank = new Bank(bankCapacity);
+
+            testBank.AddNewAccount(tmpAccount);
+
+            testBank.Save();
+
+            Bank newTestBank = new Bank();
+            newTestBank.Load();
+
         }
     }
 }
