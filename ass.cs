@@ -36,7 +36,7 @@ namespace assinment2
     {
         private Person p;
         private string cardNumber, pinCode, email;
-        private int accountBalance=0;
+        private int accountBalance = 0;
 
 
         public BankAccount(Person p, string email, string cardNumber, string pinCode, int accountBalance)
@@ -66,8 +66,9 @@ namespace assinment2
         public string PinCode { get => pinCode; set => pinCode = value; }
         public string Email { get => email; set => email = value; }
         public int AccountBalance { get => accountBalance; set => accountBalance = value; }
-       public void print() {
-            Console.WriteLine("User name: {0}",p.FullName);
+        public void print()
+        {
+            Console.WriteLine("User name: {0}", p.FullName);
             Console.WriteLine("Email: {0}", email);
             Console.WriteLine("Card number: {0}", cardNumber);
             Console.WriteLine("Pin code: {0}", pinCode);
@@ -117,7 +118,7 @@ namespace assinment2
         {
             for (int i = 0; i < NumberOfCustomers; i++)
             {
-                if (banckAccounts[i].PinCode == PinCode && banckAccounts[i].CardNumber == CardNumber) 
+                if (banckAccounts[i].PinCode == PinCode && banckAccounts[i].CardNumber == CardNumber)
 
                     return banckAccounts[i].AccountBalance;
             }
@@ -154,13 +155,11 @@ namespace assinment2
             FileStream filestream = new FileStream("Data.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter bf = new BinaryFormatter();
             int i = 0;
-            
+            BankAccount[] ba = new BankAccount[NumberOfCustomers];
             while (filestream.Position < filestream.Length)
             {
-                //retreaving all the users 
-                banckAccounts[i] = (BankAccount)bf.Deserialize(filestream);
-                // for insuring the load method
-                banckAccounts[i].print();
+                ba[i] = (BankAccount)bf.Deserialize(filestream);
+                ba[i].print();
                 i++;
 
             }
@@ -177,8 +176,11 @@ namespace assinment2
     {
         static void Main(string[] args)
         {
-            
+           
+
+
 
         }
     }
 }
+
