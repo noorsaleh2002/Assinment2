@@ -1,0 +1,8 @@
+C:\Users\noor1\Desktop\A2\A2\bin\Debug\A2.exe.config
+C:\Users\noor1\Desktop\A2\A2\bin\Debug\A2.exe
+C:\Users\noor1\Desktop\A2\A2\bin\Debug\A2.pdb
+C:\Users\noor1\Desktop\A2\A2\obj\Debug\A2.csproj.AssemblyReference.cache
+C:\Users\noor1\Desktop\A2\A2\obj\Debug\A2.csproj.SuggestedBindingRedirects.cache
+C:\Users\noor1\Desktop\A2\A2\obj\Debug\A2.csproj.CoreCompileInputs.cache
+C:\Users\noor1\Desktop\A2\A2\obj\Debug\A2.exe
+C:\Users\noor1\Desktop\A2\A2\obj\Debug\A2.pdb
